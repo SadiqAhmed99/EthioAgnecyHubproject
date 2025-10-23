@@ -44,8 +44,8 @@ A comprehensive digital management platform designed exclusively for Ethiopian f
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
-   cd ethio-agency-hub
+   git clone https://github.com/SadiqAhmed99/EthioAgnecyHubproject.git
+   cd EthioAgnecyHubproject
    ```
 
 2. **Install dependencies**
@@ -151,11 +151,23 @@ The application follows Remix conventions with:
 
 ## 🤝 Contributing
 
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
+
 1. Fork the repository
-2. Create a feature branch
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
 3. Make your changes
 4. Add tests for new functionality
-5. Submit a pull request
+5. Commit your changes (`git commit -m 'Add amazing feature'`)
+6. Push to the branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request
+
+## 📊 Repository Stats
+
+![GitHub stars](https://img.shields.io/github/stars/SadiqAhmed99/EthioAgnecyHubproject?style=social)
+![GitHub forks](https://img.shields.io/github/forks/SadiqAhmed99/EthioAgnecyHubproject?style=social)
+![GitHub issues](https://img.shields.io/github/issues/SadiqAhmed99/EthioAgnecyHubproject)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/SadiqAhmed99/EthioAgnecyHubproject)
+![GitHub license](https://img.shields.io/github/license/SadiqAhmed99/EthioAgnecyHubproject)
 
 ## 📄 License
 

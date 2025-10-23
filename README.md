@@ -73,6 +73,29 @@ A comprehensive digital management platform designed exclusively for Ethiopian f
 6. **Open your browser**
    Navigate to `http://localhost:3000`
 
+### 🚀 Quick Deployment to Vercel
+
+**Deploy in 5 minutes:**
+
+1. **Visit [Vercel](https://vercel.com)** and sign up with GitHub
+2. **Import Project** → Select `SadiqAhmed99/EthioAgnecyHubproject`
+3. **Configure Environment Variables**:
+   - `DATABASE_URL`: Your PostgreSQL connection string
+   - `JWT_SECRET`: Your JWT secret key
+   - `SESSION_SECRET`: Your session secret
+4. **Deploy!** Your app will be live at `https://your-project.vercel.app`
+
+**Or use the deployment script:**
+```bash
+# Linux/Mac
+./deploy.sh
+
+# Windows
+deploy.bat
+```
+
+📖 **Detailed deployment guide**: See [DEPLOYMENT.md](DEPLOYMENT.md)
+
 ## 📁 Project Structure
 
 ```

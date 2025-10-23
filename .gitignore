@@ -123,3 +123,4 @@ playwright/.cache/
 
 # Netlify
 .netlify
+node_modules

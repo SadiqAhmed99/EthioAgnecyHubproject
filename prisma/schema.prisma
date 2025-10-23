@@ -1,0 +1,388 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User Management
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  firstName String
+  lastName  String
+  role      UserRole @default(AGENT)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  agencyId String?
+  agency   Agency? @relation(fields: [agencyId], references: [id])
+
+  // Audit fields
+  createdBy String?
+  updatedBy String?
+
+  @@map("users")
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  MANAGER
+  AGENT
+  VIEWER
+}
+
+// Agency Management
+model Agency {
+  id          String  @id @default(cuid())
+  name        String
+  license     String  @unique
+  address     String
+  phone       String
+  email       String
+  isActive    Boolean @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  users       User[]
+  employees   Employee[]
+  documents   Document[]
+  institutions Institution[]
+
+  @@map("agencies")
+}
+
+// Employee Management
+model Employee {
+  id                String            @id @default(cuid())
+  employeeId        String            @unique // Custom employee ID
+  firstName         String
+  lastName          String
+  middleName        String?
+  dateOfBirth       DateTime
+  gender            Gender
+  nationality       String            @default("Ethiopian")
+  phone             String
+  email             String?
+  address           String
+  emergencyContact  String
+  emergencyPhone    String
+  status            EmployeeStatus    @default(REGISTERED)
+  registrationDate  DateTime          @default(now())
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  // Relations
+  agencyId          String
+  agency            Agency            @relation(fields: [agencyId], references: [id])
+  passport          Passport?
+  skills            Skill[]
+  languages         Language[]
+  documents         Document[]
+  applications      Application[]
+  travels           Travel[]
+  hajjUmrah        HajjUmrah?
+
+  @@map("employees")
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum EmployeeStatus {
+  REGISTERED
+  DOCUMENT_PENDING
+  SKILL_ASSESSED
+  READY_FOR_DEPLOYMENT
+  DEPLOYED
+  RETURNED
+  SUSPENDED
+}
+
+// Passport Information
+model Passport {
+  id              String    @id @default(cuid())
+  passportNumber  String    @unique
+  issueDate       DateTime
+  expiryDate      DateTime
+  issuingCountry  String
+  issuingAuthority String
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Relations
+  employeeId      String    @unique
+  employee        Employee  @relation(fields: [employeeId], references: [id])
+
+  @@map("passports")
+}
+
+// Skills Management
+model Skill {
+  id          String      @id @default(cuid())
+  name        String
+  category    SkillCategory
+  level       SkillLevel
+  experience  Int         // Years of experience
+  certification String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  // Relations
+  employeeId  String
+  employee    Employee    @relation(fields: [employeeId], references: [id])
+
+  @@map("skills")
+}
+
+enum SkillCategory {
+  DOMESTIC_WORK
+  CONSTRUCTION
+  HEALTHCARE
+  EDUCATION
+  TECHNICAL
+  PROFESSIONAL
+  OTHER
+}
+
+enum SkillLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  EXPERT
+}
+
+// Language Proficiency
+model Language {
+  id          String           @id @default(cuid())
+  name        String
+  proficiency LanguageLevel
+  certification String?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  // Relations
+  employeeId  String
+  employee    Employee         @relation(fields: [employeeId], references: [id])
+
+  @@map("languages")
+}
+
+enum LanguageLevel {
+  BASIC
+  INTERMEDIATE
+  ADVANCED
+  NATIVE
+}
+
+// Document Management
+model Document {
+  id          String         @id @default(cuid())
+  type        DocumentType
+  name        String
+  filePath    String
+  fileSize    Int
+  mimeType    String
+  status      DocumentStatus @default(PENDING)
+  uploadedAt  DateTime       @default(now())
+  verifiedAt  DateTime?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  // Relations
+  employeeId  String?
+  employee    Employee?      @relation(fields: [employeeId], references: [id])
+  agencyId    String
+  agency      Agency         @relation(fields: [agencyId], references: [id])
+
+  @@map("documents")
+}
+
+enum DocumentType {
+  NATIONAL_ID
+  PASSPORT
+  BIRTH_CERTIFICATE
+  MEDICAL_CERTIFICATE
+  EDUCATIONAL_CERTIFICATE
+  SKILL_CERTIFICATE
+  POLICE_CLEARANCE
+  EMPLOYMENT_CONTRACT
+  VISA
+  OTHER
+}
+
+enum DocumentStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+  EXPIRED
+}
+
+// Job Applications
+model Application {
+  id              String            @id @default(cuid())
+  jobTitle        String
+  destination     String
+  employer        String
+  salary          Decimal?
+  contractStart   DateTime?
+  contractEnd     DateTime?
+  status          ApplicationStatus  @default(SUBMITTED)
+  submittedAt     DateTime          @default(now())
+  approvedAt      DateTime?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  // Relations
+  employeeId      String
+  employee        Employee          @relation(fields: [employeeId], references: [id])
+
+  @@map("applications")
+}
+
+enum ApplicationStatus {
+  SUBMITTED
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+  DEPLOYED
+  COMPLETED
+}
+
+// Travel Management
+model Travel {
+  id              String        @id @default(cuid())
+  flightNumber    String?
+  departureDate   DateTime?
+  arrivalDate     DateTime?
+  departureAirport String?
+  arrivalAirport   String?
+  status          TravelStatus  @default(SCHEDULED)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  // Relations
+  employeeId      String
+  employee        Employee      @relation(fields: [employeeId], references: [id])
+
+  @@map("travels")
+}
+
+enum TravelStatus {
+  SCHEDULED
+  CONFIRMED
+  IN_TRANSIT
+  ARRIVED
+  CANCELLED
+}
+
+// Hajj & Umrah Management
+model HajjUmrah {
+  id              String          @id @default(cuid())
+  type            PilgrimageType
+  year            Int
+  groupNumber     String?
+  status          PilgrimageStatus @default(REGISTERED)
+  registrationDate DateTime        @default(now())
+  departureDate   DateTime?
+  returnDate      DateTime?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  // Relations
+  employeeId      String          @unique
+  employee        Employee        @relation(fields: [employeeId], references: [id])
+
+  @@map("hajj_umrah")
+}
+
+enum PilgrimageType {
+  HAJJ
+  UMRAH
+}
+
+enum PilgrimageStatus {
+  REGISTERED
+  DOCUMENT_PENDING
+  APPROVED
+  DEPARTED
+  RETURNED
+  CANCELLED
+}
+
+// Institution Management
+model Institution {
+  id          String            @id @default(cuid())
+  name        String
+  type        InstitutionType
+  address     String
+  phone       String
+  email       String
+  contactPerson String
+  isActive    Boolean           @default(true)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  // Relations
+  agencyId    String
+  agency      Agency            @relation(fields: [agencyId], references: [id])
+
+  @@map("institutions")
+}
+
+enum InstitutionType {
+  GOVERNMENT
+  BANKING
+  INSURANCE
+  MEDICAL
+  EDUCATION
+  OTHER
+}
+
+// System Configuration
+model SystemConfig {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  type      ConfigType
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("system_config")
+}
+
+enum ConfigType {
+  STRING
+  NUMBER
+  BOOLEAN
+  JSON
+}
+
+// Audit Log
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String
+  action    String
+  entity    String
+  entityId  String
+  oldValues Json?
+  newValues Json?
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@map("audit_logs")
+}

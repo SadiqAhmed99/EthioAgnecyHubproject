@@ -1,0 +1,72 @@
+{
+  "common": {
+    "welcome": "Baga nagaan EthioAgencyHub dhuftan",
+    "login": "Seeni",
+    "logout": "Ba'i",
+    "dashboard": "Dashboordii",
+    "settings": "Qindaa'ina",
+    "profile": "Profaayilii",
+    "save": "Olkaa'i",
+    "cancel": "Haqi",
+    "delete": "Balleessi",
+    "edit": "Gulaali",
+    "search": "Barbaadi",
+    "loading": "Fe'ama jira...",
+    "currency": "Birrii",
+    "language": "Afaan"
+  },
+  "navigation": {
+    "home": "Mana",
+    "agents": "Ejentootaa",
+    "travel": "Imala",
+    "documents": "Galmee",
+    "employees": "Hojjattoota",
+    "hajj_umrah": "Hajjii fi Umraa",
+    "institutions": "Dhaabbilee",
+    "reports": "Gabaasa fi Xiinxala",
+    "administration": "Bulchiinsa",
+    "settings": "Qindaa'ina",
+    "about": "Waa'ee Keenya",
+    "services": "Tajaajila"
+  },
+  "auth": {
+    "email": "Imeelii",
+    "password": "Jecha Iccitii",
+    "forgot_password": "Jecha Iccitii Irraanfatte?",
+    "sign_in": "Seeni",
+    "sign_up": "Galmaa'i",
+    "remember_me": "Na Yaadadhu"
+  },
+  "subscription": {
+    "title": "Karoora Maamila",
+    "description": "Karoora ejensiidhaaf mijatu filadhu",
+    "monthly": "Karoora Ji'aa",
+    "quarterly": "Karoora Kurmaanaa",
+    "yearly": "Karoora Waggaa",
+    "month": "ji'a",
+    "quarter": "kurmaana",
+    "year": "waggaa",
+    "monthly_description": "Ejensii xixiqqaa haaraa jalqabaniif mijata",
+    "quarterly_description": "Ejensii guddachaa jiraniif gatii gaarii",
+    "yearly_description": "Ejensii dhaabbataaniif gatii caalu",
+    "subscribe": "Amma Maamila",
+    "price_monthly": "2,500 Birrii",
+    "price_quarterly": "6,500 Birrii",
+    "price_yearly": "22,000 Birrii"
+  },
+  "about": {
+    "title": "Waa'ee Keenya",
+    "subtitle": "Waa'ee EthioAgencyHub fi kaayyoo keenya caalatti baradhu",
+    "our_story": "Seenaa Keenya",
+    "story_content": "Bara {{year}} hundeeffame, EthioAgencyHub ejensii imala Itoophiyaa keessatti argaman furmaata teeknoloojii ammayyaatiin dandeessisuu dhaaf uumame.",
+    "our_mission": "Kaayyoo Keenya",
+    "mission_content": "Ejensii imala Itoophiyaatiif furmaata softweeraa gatii madaalawaa, bu'a qabeessa fi amanamaa ta'e dhiyeessuun daldalaa isaanii akka guddatan fi maamiltoota isaanii caalatti akka tajaajilan gargaaruu.",
+    "our_team": "Garee Keenya",
+    "team_description": "Gareen keenya ogeeyyii {{count}} kutannoo qaban ejensii imala Itoophiyaa gargaaruuf osoo hin dadhiin hojjetu."
+  },
+  "services": {
+    "title": "Tajaajila Keenya",
+    "subtitle": "Furmaata guutuu ejensii imalaaf Itoophiyaa keessatti",
+    "learn_more": "Caalatti baradhu"
+  }
+}

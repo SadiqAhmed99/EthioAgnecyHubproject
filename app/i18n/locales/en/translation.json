@@ -1,0 +1,72 @@
+{
+  "common": {
+    "welcome": "Welcome to EthioAgencyHub",
+    "login": "Login",
+    "logout": "Logout",
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "profile": "Profile",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search",
+    "loading": "Loading...",
+    "currency": "ETB",
+    "language": "Language"
+  },
+  "navigation": {
+    "home": "Home",
+    "agents": "Agents",
+    "travel": "Travel",
+    "documents": "Documents",
+    "employees": "Employees",
+    "hajj_umrah": "Hajj & Umrah",
+    "institutions": "Institutions",
+    "reports": "Reports & Analytics",
+    "administration": "Administration",
+    "settings": "Settings",
+    "about": "About",
+    "services": "Services"
+  },
+  "auth": {
+    "email": "Email",
+    "password": "Password",
+    "forgot_password": "Forgot Password?",
+    "sign_in": "Sign In",
+    "sign_up": "Sign Up",
+    "remember_me": "Remember Me"
+  },
+  "subscription": {
+    "title": "Subscription Plans",
+    "description": "Choose the plan that works best for your agency",
+    "monthly": "Monthly Plan",
+    "quarterly": "Quarterly Plan",
+    "yearly": "Yearly Plan",
+    "month": "month",
+    "quarter": "quarter",
+    "year": "year",
+    "monthly_description": "Perfect for small agencies just getting started",
+    "quarterly_description": "Great value for growing agencies",
+    "yearly_description": "Best value for established agencies",
+    "subscribe": "Subscribe Now",
+    "price_monthly": "2,500 ETB",
+    "price_quarterly": "6,500 ETB",
+    "price_yearly": "22,000 ETB"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Learn more about EthioAgencyHub and our mission",
+    "our_story": "Our Story",
+    "story_content": "Founded in {{year}}, EthioAgencyHub was created to empower travel agencies across Ethiopia with modern technology solutions.",
+    "our_mission": "Our Mission",
+    "mission_content": "To provide Ethiopian travel agencies with affordable, efficient, and reliable software solutions that help them grow their business and serve their customers better.",
+    "our_team": "Our Team",
+    "team_description": "Our team of {{count}} dedicated professionals works tirelessly to support Ethiopian travel agencies."
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Comprehensive solutions for travel agencies in Ethiopia",
+    "learn_more": "Learn more"
+  }
+}

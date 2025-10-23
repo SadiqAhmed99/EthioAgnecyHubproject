@@ -1,0 +1,72 @@
+{
+  "common": {
+    "welcome": "ወደ ኢትዮ ኤጀንሲ ሀብ እንኳን ደህና መጡ",
+    "login": "ግባ",
+    "logout": "ውጣ",
+    "dashboard": "ዳሽቦርድ",
+    "settings": "ቅንብሮች",
+    "profile": "መገለጫ",
+    "save": "አስቀምጥ",
+    "cancel": "ሰርዝ",
+    "delete": "አጥፋ",
+    "edit": "አስተካክል",
+    "search": "ፈልግ",
+    "loading": "በመጫን ላይ...",
+    "currency": "ብር",
+    "language": "ቋንቋ"
+  },
+  "navigation": {
+    "home": "መነሻ",
+    "agents": "ወኪሎች",
+    "travel": "ጉዞ",
+    "documents": "ሰነዶች",
+    "employees": "ሰራተኞች",
+    "hajj_umrah": "ሐጅ እና ዑምራ",
+    "institutions": "ተቋማት",
+    "reports": "ሪፖርቶች እና ትንታኔዎች",
+    "administration": "አስተዳደር",
+    "settings": "ቅንብሮች",
+    "about": "ስለ እኛ",
+    "services": "አገልግሎቶች"
+  },
+  "auth": {
+    "email": "ኢሜይል",
+    "password": "የይለፍ ቃል",
+    "forgot_password": "የይለፍ ቃል ረሳህ?",
+    "sign_in": "ግባ",
+    "sign_up": "ተመዝገብ",
+    "remember_me": "አስታውሰኝ"
+  },
+  "subscription": {
+    "title": "የደንበኝነት እቅዶች",
+    "description": "ለኤጀንሲዎ የሚስማማውን እቅድ ይምረጡ",
+    "monthly": "ወርሃዊ እቅድ",
+    "quarterly": "ሩብ ዓመታዊ እቅድ",
+    "yearly": "ዓመታዊ እቅድ",
+    "month": "ወር",
+    "quarter": "ሩብ ዓመት",
+    "year": "ዓመት",
+    "monthly_description": "ለአዲስ የሚጀምሩ ትናንሽ ኤጀንሲዎች ተስማሚ",
+    "quarterly_description": "ለአድጋ ላይ ላሉ ኤጀንሲዎች ጥሩ ዋጋ",
+    "yearly_description": "ለተረጋጉ ኤጀንሲዎች ምርጥ ዋጋ",
+    "subscribe": "አሁን ይመዝገቡ",
+    "price_monthly": "2,500 ብር",
+    "price_quarterly": "6,500 ብር",
+    "price_yearly": "22,000 ብር"
+  },
+  "about": {
+    "title": "ስለ እኛ",
+    "subtitle": "ስለ ኢትዮ ኤጀንሲ ሀብ እና ተልዕኮአችን የበለጠ ይወቁ",
+    "our_story": "የእኛ ታሪክ",
+    "story_content": "በ{{year}} የተመሰረተው ኢትዮ ኤጀንሲ ሀብ በኢትዮጵያ ውስጥ ያሉ የጉዞ ኤጀንሲዎችን በዘመናዊ የቴክኖሎጂ መፍትሄዎች ለማብቃት ተፈጥሯል።",
+    "our_mission": "ተልዕኮአችን",
+    "mission_content": "ለኢትዮጵያ የጉዞ ኤጀንሲዎች ተመጣጣኝ፣ ውጤታማ እና አስተማማኝ የሶፍትዌር መፍትሄዎችን በማቅረብ ንግዳቸውን እንዲያሳድጉ እና ደንበኞቻቸውን በተሻለ ሁኔታ እንዲያገለግሉ ማገዝ።",
+    "our_team": "የእኛ ቡድን",
+    "team_description": "የ{{count}} ቁርጠኛ ባለሙያዎች ቡድናችን የኢትዮጵያ የጉዞ ኤጀንሲዎችን ለመደገፍ ያለ ድካም ይሰራል።"
+  },
+  "services": {
+    "title": "አገልግሎቶቻችን",
+    "subtitle": "በኢትዮጵያ ለጉዞ ኤጀንሲዎች ሁሉን አቀፍ መፍትሄዎች",
+    "learn_more": "ተጨማሪ ይወቁ"
+  }
+}

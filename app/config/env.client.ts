@@ -1,11 +1,21 @@
 import { z } from 'zod';
 
+// InsForge config type
+export type InsforgeConfig = {
+  baseUrl: string;
+  apiKey: string;
+};
+
 // Client-safe environment variables schema
 const clientEnvSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   
   // Public API endpoints
   API_BASE_URL: z.string().url().optional(),
+  
+  // InsForge Configuration
+  INSFORGE_API_URL: z.string().url().optional(),
+  INSFORGE_API_KEY: z.string().optional(),
   
   // Feature flags
   ENABLE_ANALYTICS: z.string().default('false'),
@@ -71,6 +81,12 @@ export const externalServices = {
   recaptcha: {
     siteKey: clientEnv.RECAPTCHA_SITE_KEY,
   },
+};
+
+// InsForge configuration
+export const insforgeConfig = {
+  baseUrl: clientEnv.INSFORGE_API_URL || '',
+  apiKey: clientEnv.INSFORGE_API_KEY || '',
 };
 
 // Validation helper

@@ -1,10 +1,24 @@
-import { ErrorBoundary } from '~/components/ui/ErrorBoundary';
+import { isRouteErrorResponse, useRouteError } from '@remix-run/react';
+import { ErrorDisplay } from '~/components/ui/ErrorBoundary';
 
-export function ErrorBoundaryComponent() {
+export default function AppErrorBoundary() {
+  const error = useRouteError();
+
+  if (isRouteErrorResponse(error)) {
+    return (
+      <ErrorDisplay
+        title={`${error.status} ${error.statusText}`}
+        message={error.data || 'An error occurred in the application.'}
+      />
+    );
+  }
+
+  const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+  
   return (
-    <ErrorBoundary
+    <ErrorDisplay
       title="App Error"
-      message="An error occurred in the application. Please try refreshing the page."
+      message={errorMessage}
       showRetry={true}
     />
   );

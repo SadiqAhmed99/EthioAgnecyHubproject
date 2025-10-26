@@ -1,9 +1,16 @@
-import { useRouteError } from '@remix-run/react';
+import { isRouteErrorResponse, useRouteError } from '@remix-run/react';
 import { useTranslation } from 'react-i18next';
 
 export default function MarketingError() {
   const error = useRouteError();
   const { t } = useTranslation();
+  
+  const getErrorMessage = () => {
+    if (isRouteErrorResponse(error)) {
+      return error.data || t('errors.unknown_error');
+    }
+    return error instanceof Error ? error.message : t('errors.unknown_error');
+  };
   
   return (
     <div className="min-h-[70vh] flex flex-col items-center justify-center px-4">
@@ -12,7 +19,7 @@ export default function MarketingError() {
           {t('errors.something_went_wrong')}
         </h1>
         <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
-          {error instanceof Error ? error.message : t('errors.unknown_error')}
+          {getErrorMessage()}
         </p>
         <a
           href="/"

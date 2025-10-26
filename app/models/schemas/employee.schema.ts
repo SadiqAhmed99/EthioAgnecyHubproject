@@ -218,9 +218,12 @@ export const EmployeeSearchSchema = z.object({
 })
 
 export const DocumentSearchSchema = z.object({
+  query: z.string().optional(),
   type: DocumentTypeSchema.optional(),
   status: DocumentStatusSchema.optional(),
   employeeId: z.string().optional(),
+  dateFrom: z.string().optional(),
+  dateTo: z.string().optional(),
   page: z.number().min(1).default(1),
   limit: z.number().min(1).max(100).default(20),
 })

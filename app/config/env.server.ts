@@ -20,6 +20,10 @@ const serverEnvSchema = z.object({
   // External services
   MOLS_API_URL: z.string().url().optional(),
   MOLS_API_KEY: z.string().optional(),
+
+  // InsForge backend service
+  INSFORGE_API_URL: z.string().url().optional(),
+  INSFORGE_API_KEY: z.string().optional(),
   
   // File upload
   MAX_FILE_SIZE: z.string().default('10485760'), // 10MB
@@ -97,4 +101,10 @@ export const smsConfig = {
 export const molsConfig = {
   apiUrl: serverEnv.MOLS_API_URL,
   apiKey: serverEnv.MOLS_API_KEY,
+};
+
+// InsForge configuration
+export const insforgeConfig = {
+  baseUrl: serverEnv.INSFORGE_API_URL,
+  apiKey: serverEnv.INSFORGE_API_KEY,
 };

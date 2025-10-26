@@ -1,10 +1,25 @@
-import { ErrorBoundary } from '~/components/ui/ErrorBoundary';
+import { isRouteErrorResponse, useRouteError } from '@remix-run/react';
+import { ErrorDisplay } from '~/components/ui/ErrorBoundary';
 
-export function ErrorBoundaryComponent() {
+export default function EmployeeManagementError() {
+  const error = useRouteError();
+
+  if (isRouteErrorResponse(error)) {
+    return (
+      <ErrorDisplay
+        title="Employee Management Error"
+        message={error.data || 'An error occurred in employee management.'}
+        showRetry={true}
+      />
+    );
+  }
+
+  const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+  
   return (
-    <ErrorBoundary
+    <ErrorDisplay
       title="Employee Management Error"
-      message="An error occurred in employee management. Please try again."
+      message={errorMessage}
       showRetry={true}
     />
   );

@@ -1,5 +1,5 @@
 import { prisma } from '~/lib/prisma.server'
-import { CreateDocumentSchema, DocumentSearchSchema } from '~/models/schemas/document.schema'
+import { CreateDocumentSchema, DocumentSearchSchema } from '~/models/schemas/employee.schema'
 import type { Document, DocumentSearchParams, DocumentStats } from '~/models/document.types'
 
 export class DocumentService {
@@ -97,15 +97,43 @@ export class DocumentService {
         verified,
         rejected,
         expired,
+        verifiedDocuments,
       ] = await Promise.all([
         prisma.document.count({ where: { agencyId } }),
         prisma.document.count({ where: { agencyId, status: 'PENDING' } }),
         prisma.document.count({ where: { agencyId, status: 'VERIFIED' } }),
         prisma.document.count({ where: { agencyId, status: 'REJECTED' } }),
         prisma.document.count({ where: { agencyId, status: 'EXPIRED' } }),
+        prisma.document.findMany({
+          where: {
+            agencyId,
+            status: 'VERIFIED',
+            verifiedAt: { not: null },
+          },
+          select: {
+            uploadedAt: true,
+            verifiedAt: true,
+          },
+        }),
       ])
 
       const verificationRate = total > 0 ? (verified / total) * 100 : 0
+
+      // Calculate average verification time
+      let averageVerificationTime = 0
+      if (verifiedDocuments.length > 0) {
+        const totalVerificationTime = verifiedDocuments.reduce((sum, doc) => {
+          if (doc.verifiedAt) {
+            const verificationTime = doc.verifiedAt.getTime() - doc.uploadedAt.getTime()
+            return sum + verificationTime
+          }
+          return sum
+        }, 0)
+        
+        averageVerificationTime = totalVerificationTime / verifiedDocuments.length
+        // Convert from milliseconds to hours for better readability
+        averageVerificationTime = averageVerificationTime / (1000 * 60 * 60)
+      }
 
       return {
         total,
@@ -114,7 +142,7 @@ export class DocumentService {
         rejected,
         expired,
         verificationRate,
-        averageVerificationTime: 0, // TODO: Calculate based on verification timestamps
+        averageVerificationTime,
       }
     } catch (error) {
       console.error('Get document stats error:', error)

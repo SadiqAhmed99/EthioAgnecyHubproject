@@ -1,7 +1,8 @@
 import { json, defer } from '@remix-run/node'
-import { useLoaderData, Link, useSearchParams } from '@remix-run/react'
+import { useLoaderData, Link, useSearchParams, useFetcher } from '@remix-run/react'
 import { requireAuth } from '~/middleware/authMiddleware.server'
 import { prisma } from '~/lib/prisma.server'
+import { useEffect } from 'react'
 
 export async function loader({ request }: { request: Request }) {
   const user = await requireAuth(request)
@@ -43,6 +44,18 @@ export async function loader({ request }: { request: Request }) {
 
 export default function Administration() {
   const { user, stats, searchParams } = useLoaderData<typeof loader>()
+  const healthFetcher = useFetcher<any>()
+
+  useEffect(() => {
+    healthFetcher.load('/resources/insforge-health')
+  }, [])
+
+  const ok = healthFetcher.data?.ok === true
+  const status = healthFetcher.data?.status
+  const source = healthFetcher.data?.source
+  const latency = healthFetcher.data?.latencyMs
+  const message = healthFetcher.data?.message
+  const error = healthFetcher.data?.error
 
   return (
     <div className="space-y-6">
@@ -268,6 +281,43 @@ export default function Administration() {
                   <p className="text-xs text-gray-500">Track user actions</p>
                 </div>
               </Link>
+
+              {/* InsForge Health Card */}
+              <div className="p-3 border border-gray-200 rounded-lg">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <span
+                      className={`inline-block h-3 w-3 rounded-full ${
+                        healthFetcher.state === 'loading'
+                          ? 'bg-yellow-400'
+                          : ok
+                          ? 'bg-green-500'
+                          : 'bg-red-500'
+                      }`}
+                    />
+                    <div className="ml-3">
+                      <h3 className="text-sm font-medium text-gray-900">InsForge Connectivity</h3>
+                      <p className="text-xs text-gray-500">
+                        {healthFetcher.state === 'loading'
+                          ? 'Checking...'
+                          : ok
+                          ? message || 'InsForge reachable'
+                          : error || 'InsForge unreachable'}
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => healthFetcher.load('/resources/insforge-health')}
+                    className="btn-outline"
+                  >
+                    Refresh
+                  </button>
+                </div>
+                <div className="mt-2 text-xs text-gray-500">
+                  Status: {status ?? '-'} • Source: {source ?? '-'} • Latency: {latency ?? '-'} ms
+                </div>
+              </div>
             </div>
           </div>
         </div>
